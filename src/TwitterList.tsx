@@ -37,7 +37,7 @@ const TwitterList = () => {
 			<div>twitterList</div>
 			{data.map((tuit) => {
 				return (
-					<div key={tuit.id} style={{ textAlign: "left" }}>
+					<div key={tuit.id} className="left">
 						<span>{tuit.author.userName}</span>
 						<span>{tuit.date}</span>
 						<span>{tuit.message}</span>

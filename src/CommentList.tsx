@@ -37,14 +37,14 @@ const CommentList = () => {
 			<ul>
 				{data.slice(0, 100).map((comment) => {
 					return (
-						<div key={comment.id} style={{ textAlign: "left" }}>
+						<li key={comment.id} className="left">
 							<p>
 								<span className="author">
 									@{comment.email.substring(0, comment.email.indexOf("@"))}
 								</span>
 								: <span>{comment.body}</span>
 							</p>
-						</div>
+						</li>
 					);
 				})}
 			</ul>

@@ -1,6 +1,5 @@
 import twitterLogo from "./assets/twitter.png";
 import "./App.css";
-import TwitterList from "./TwitterList";
 import CommentList from "./CommentList";
 
 function App() {

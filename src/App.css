@@ -10,6 +10,10 @@
 	font-weight: bold;
 }
 
+.left {
+	text-align: left;
+}
+
 .logo {
 	height: 6em;
 	padding: 1.5em;
