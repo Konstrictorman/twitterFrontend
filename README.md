@@ -98,6 +98,10 @@ Resources:
           FromPort: 22
           ToPort: 22
           CidrIp: "0.0.0.0/0"
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: 0.0.0.0/0
 ```
 
 Vale la pena resaltar los siguientes aspectos de la plantilla yaml:
@@ -105,7 +109,8 @@ Vale la pena resaltar los siguientes aspectos de la plantilla yaml:
 - La ruta al repositorio donde está la aplicación react a desplegar está definida como el parámetro (GitHubRepository)
 - Cada instancia EC2 corre una imagen de Amazon Linux, identificada por id: ami-05c13eab67c5d8861 []
 - Cada instancia EC2 se instala con git, npm y nodejs
-- Se crea un grupo de seguridad con permiso de acceso a través del puerto 22.  (Necesario para la comunicación vía SSH)
+- Se crea un grupo de seguridad con permiso de acceso a través del puerto 22 (Necesario para la comunicación vía SSH) y otro permiso para el puerto 3000, por donde responderá la aplicación de React
+
 
 Al final de la creación del stack, al que se ha llamado  "react-app-stack"
 
