@@ -8,6 +8,9 @@ Esta es una simple aplicación de React.js creada a partir de vite [https://vite
 
 La aplicación está desplegada en 3 instancias de EC2, aprovisionadas a través de CloudFormation
 
+![image](https://github.com/Konstrictorman/twitterFrontend/assets/5210457/ebc5fb6e-b3aa-4d66-84e1-767a97ef76df)
+
+
 <br><br>
 ## Stack CloudFormation
 
