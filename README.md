@@ -97,11 +97,16 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
-          CidrIp: "0.0.0.0/0"
+          CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: 3000
           ToPort: 3000
           CidrIp: 0.0.0.0/0
+
+  Outputs:
+  WebsiteURL:
+    Description: 'URL of the React application'
+    Value: !Sub 'http://${EC2Instance1.PublicDnsName}:3000'
 ```
 
 Vale la pena resaltar los siguientes aspectos de la plantilla yaml:
