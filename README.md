@@ -14,99 +14,67 @@ La aplicación está desplegada en 3 instancias de EC2, aprovisionadas a través
 La plantilla utilizada para crear el stack es como sigue:
 
 ```yaml
-AWSTemplateFormatVersion: "2010-09-09"
-
+AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
+  KeyName:
+    Type: String
+    Description: Name of an existing EC2 KeyPair for SSH access
+    ConstraintDescription: must be the name of an existing EC2 KeyPair
+    Default: MyKeyPair
   GitHubRepository:
     Type: String
-    Description: "GitHub repository URL for the React application"
-    Default: "https://github.com/Konstrictorman/twitterFrontend"
-
+    Description: GitHub repository URL for the React.js application
+    Default: https://github.com/Konstrictorman/twitterFrontend
 Resources:
   EC2Instance1:
-    Type: "AWS::EC2::Instance"
+    Type: AWS::EC2::Instance
     Properties:
-      ImageId: "ami-05c13eab67c5d8861"
-      InstanceType: "t2.micro"
-      SecurityGroupIds:
-        - !Ref EC2SecurityGroup
-      KeyName: "MyKeyPair"
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          yum update -y
-          yum install -y git
-          git clone ${GitHubRepository}
-          cd twitterFrontend
-          yum install -y nodejs npm
-          npm install
-          npm start
+      ImageId: ami-05c13eab67c5d8861
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      SecurityGroups:
+        - !Ref MySecurityGroup
       Tags:
         - Key: Name
-          Value: "EC2Instance1"
-
+          Value: EC2Instance1
   EC2Instance2:
-    Type: "AWS::EC2::Instance"
+    Type: AWS::EC2::Instance
     Properties:
-      ImageId: "ami-05c13eab67c5d8861"
-      InstanceType: "t2.micro"
-      SecurityGroupIds:
-        - !Ref EC2SecurityGroup
-      KeyName: "MyKeyPair"
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          yum update -y
-          yum install -y git
-          git clone ${GitHubRepository}
-          cd twitterFrontend
-          yum install -y nodejs npm
-          npm install
-          npm start
+      ImageId: ami-05c13eab67c5d8861
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      SecurityGroups:
+        - !Ref MySecurityGroup
       Tags:
         - Key: Name
-          Value: "EC2Instance2"
-
+          Value: EC2Instance2
   EC2Instance3:
-    Type: "AWS::EC2::Instance"
+    Type: AWS::EC2::Instance
     Properties:
-      ImageId: "ami-05c13eab67c5d8861"
-      InstanceType: "t2.micro"
-      SecurityGroupIds:
-        - !Ref EC2SecurityGroup
-      KeyName: "MyKeyPair"
-      UserData:
-        Fn::Base64: !Sub |
-          #!/bin/bash
-          yum update -y
-          yum install -y git
-          git clone ${GitHubRepository}
-          cd twitterFrontend
-          yum install -y nodejs npm
-          npm install
-          npm start
+      ImageId: ami-05c13eab67c5d8861
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      SecurityGroups:
+        - !Ref MySecurityGroup
       Tags:
         - Key: Name
-          Value: "EC2Instance3"
-
-  EC2SecurityGroup:
-    Type: "AWS::EC2::SecurityGroup"
+          Value: EC2Instance3
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "Security group for EC2 instances"
+      GroupDescription: Allow SSH and React App
       SecurityGroupIngress:
-        - IpProtocol: tcp
+        - CidrIp: 0.0.0.0/0
           FromPort: 22
           ToPort: 22
-          CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
+        - CidrIp: 0.0.0.0/0
           FromPort: 3000
           ToPort: 3000
-          CidrIp: 0.0.0.0/0
-
-  Outputs:
+Outputs:
   WebsiteURL:
-    Description: 'URL of the React application'
     Value: !Sub 'http://${EC2Instance1.PublicDnsName}:3000'
+    Description: URL for accessing the React.js application
+
 ```
 
 Vale la pena resaltar los siguientes aspectos de la plantilla yaml:
