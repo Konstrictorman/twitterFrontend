@@ -1,14 +1,20 @@
-import twitterLogo from "./assets/twitter.png";
+import "./bds.min.css";
 import "./App.css";
-import CommentList from "./CommentList";
+import Header from "./components/header/header";
+import PersonalInfo from "./components/personalInfo/personalInfo";
+import Experience from "./components/experience/experience";
+import Profile from "./components/profile/profile";
 
 function App() {
 	return (
-		<>
-			<h1>Twitter app</h1>
-			<img src={twitterLogo} alt="twitter" />
-			<CommentList />
-		</>
+		<div className="bc-w-100">
+			<Header />
+			<div style={{ display: "flex" }}>
+				<PersonalInfo />
+				<Experience />
+				<Profile />
+			</div>
+		</div>
 	);
 }
 
